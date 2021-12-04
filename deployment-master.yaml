@@ -1,0 +1,47 @@
+# Autor: Pablo Fernando Flores Magaña
+# Número de Control : 17240273
+# Repositorio: https://github.com/PFERHD7/Orquesta 
+# Laboratorio para el Despliegue de Aplicaciones Empresariales
+# Grupo 10:30 am
+# Configuración del Deployment de la base de datos
+
+apiVersion: apps/v1                           # Versión de la Api
+kind: Deployment                              # Tipo de objeto: Despliegue
+metadata:
+  name: deployment-mysql                      # Nombre del despliegue
+  labels:
+    app: mysql                             
+spec:
+  selector:                                   # Permite seleccionar un conjunto de objetos que los condicione 
+    matchLabels:                              # en este caso etiquetas que coincidan 
+      app: mysql
+      tier: bd
+  replicas: 1                                 # Réplicas
+  template:                                   # plantilla para los contenedores
+    metadata:
+      labels:
+        app: mysql                            # Etiqueta de labase de datos
+        tier: bd                              # Etiqueta de nivel
+    spec:
+      containers:                             # Contenedor
+      - name: my-mysql                        # Nombre del contenedor
+        image: pferhd7/my-mysql:v2            # Imagen de Mysql con mi Base de Datos Cargada
+        env:
+        - name: MYSQL_ROOT_PASSWORD           # Variable de entorno para contraseña del root
+          value: root
+        - name: MYSQL_DATABASE                # Variable de entorno para la base de datos
+          value: formulario
+        - name: MYSQL_USER
+          value: pablo
+        - name: MYSQL_PASSWORD
+          value: pablo123
+        args: ["--default-authentication-plugin=mysql_native_password"]
+        ports:                                # Puerto del contenedor
+        - containerPort: 3306
+        volumeMounts:                         # Volumen Persistente
+        - name: master-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+        - name: master-persistent-storage
+          persistentVolumeClaim:
+            claimName: master-pv-claim

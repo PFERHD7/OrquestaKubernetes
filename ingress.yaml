@@ -1,0 +1,25 @@
+# Autor: Pablo Fernando Flores Magaña
+# Número de Control : 17240273
+# Repositorio: https://github.com/PFERHD7/Orquesta 
+# Laboratorio para el Despliegue de Aplicaciones Empresariales
+# Grupo 10:30 am
+# Configuración del Ingress
+
+apiVersion: networking.k8s.io/v1                    # Versión de la Api
+kind: Ingress                                       # Tipo de Objeto: Ingress
+metadata:
+  name: ingress-pflores                             # Nombre del Objeto
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /   # Tipo de acción a realizar, en este caso un rewrite (Checar la documentación de la API)
+spec:
+  rules:
+  - host: app.pflores.com                           # Nombre del host
+    http: 
+      paths:
+      - path: /
+        pathType: Prefix                            # Prefijo de la ruta al ingresar a los archivos del crud.
+        backend:
+          service:
+            name: crud-svc                          # Nombre del servicio de nuestro CRUD
+            port:
+              number: 80                            # Número de puerto

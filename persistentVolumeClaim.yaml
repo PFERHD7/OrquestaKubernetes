@@ -1,0 +1,20 @@
+# Autor: Pablo Fernando Flores Magaña
+# Número de Control : 17240273
+# Repositorio: https://github.com/PFERHD7/Orquesta 
+# Laboratorio para el Despliegue de Aplicaciones Empresariales
+# Grupo 10:30 am
+# Configuración de la Reclamación del Volumen Persistente
+
+apiVersion: v1                          # Versión de la Api
+kind: PersistentVolumeClaim             # Tipo de Objeto: Reclamación del volumen persistente
+metadata:
+  name: master-pv-claim                 # Nombre del objeto
+  labels:
+    type: persistente                   # Etiqueta de tipo (Nada en especial)
+spec:
+  storageClassName: masterfiles         # Clase : La misma que en el PersistentVolume
+  accessModes: 
+    - ReadWriteOnce                     # Modo de Acceso Lectura-Escritura, solo por un nodo al mismo tiempo
+  resources:
+    requests:
+      storage: 10Gi                     # Capacidad del Almacenamiento en Gigas

@@ -1,0 +1,30 @@
+# Autor: Pablo Fernando Flores Magaña
+# Número de Control : 17240273
+# Repositorio: https://github.com/PFERHD7/Orquesta 
+# Laboratorio para el Despliegue de Aplicaciones Empresariales
+# Grupo 10:30 am
+# Configuración del Deployment del CRUD
+
+apiVersion: apps/v1             # Versión de la Api
+kind: Deployment                # Tipo de objeto: Despliegue
+metadata:
+  name: deployment-crud         # Nombre del despliegue
+  labels:
+    app: sistema-becas          
+spec:
+  selector:                     # Permite seleccionar un conjunto de objetos que los condicione     
+    matchLabels:                # en este caso etiquetas que coincidan
+      app: sistema-becas
+      tier: app-web             
+  replicas: 7	                # Número de pods
+  template:		                # plantilla para los contenedores
+    metadata:
+      labels:
+        app: sistema-becas      # Etiqueta de la aplicación
+        tier: app-web           # Etiqueta de nivel
+    spec:
+      containers:
+      - name: sistema-becas                 # Nombre del contenedor
+        image: pferhd7/apache2-crud:v5      # Imagen del contenedor
+        ports: 
+        - containerPort: 80                 # Puerto del contenedor

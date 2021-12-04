@@ -1,0 +1,23 @@
+# Autor: Pablo Fernando Flores Magaña
+# Número de Control : 17240273
+# Repositorio: https://github.com/PFERHD7/Orquesta 
+# Laboratorio para el Despliegue de Aplicaciones Empresariales
+# Grupo 10:30 am
+# Configuración del Servicio del CRUD
+
+apiVersion: v1                  # Versión de la Api
+kind: Service                   # Tipo de objeto: Servicio
+metadata:
+  name: crud-svc                # Nombre del Servicio (Importante)
+  labels:
+    app: sistema-becas          # Mismas labels que el Deploy
+    tier: app-web
+spec:
+  type: LoadBalancer            # Tipo Carga balanceada, para las peticiones de ingreso, se usa para servicios "cloud"
+  ports:    
+  - port: 80                    # Puerto y Protocolo
+    targetPort: 80
+    protocol: 'TCP'
+  selector:                     
+    app: sistema-becas          # Mismas etiquetas del deployment
+    tier: app-web

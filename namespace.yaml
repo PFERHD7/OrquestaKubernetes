@@ -1,0 +1,13 @@
+# Autor: Pablo Fernando Flores Magaña
+# Número de Control : 17240273
+# Repositorio: https://github.com/PFERHD7/Orquesta 
+# Laboratorio para el Despliegue de Aplicaciones Empresariales
+# Grupo 10:30 am
+# Configuración del namespace
+
+apiVersion: v1          # Versión de la Api
+kind: Namespace         # Tipo de Objeto: Espacio de nombres
+metadata:
+    name: pflores       # Nombre del espacio
+    labels:
+      tipo: orquesta    # Etiqueta de tipo

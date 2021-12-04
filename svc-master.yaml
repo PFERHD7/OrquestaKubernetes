@@ -1,0 +1,22 @@
+# Autor: Pablo Fernando Flores Magaña
+# Número de Control : 17240273
+# Repositorio: https://github.com/PFERHD7/Orquesta 
+# Laboratorio para el Despliegue de Aplicaciones Empresariales
+# Grupo 10:30 am
+# Configuración del Servicio de la base de datos
+
+apiVersion: v1                   # Versión de la Api
+kind: Service                    # Tipo de objeto: Servicio
+metadata:
+  name: database                 # Nombre del Servicio (Conector)
+  labels:                        
+    app: mysql                   # Mismas labels que el Deploy
+    tier: bd
+spec:
+  type : NodePort
+  ports:                         # Puerto y Protocolo
+  - port: 3306
+    protocol: TCP
+  selector:                      
+    app: mysql
+    tier: bd
